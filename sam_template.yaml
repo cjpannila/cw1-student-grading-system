@@ -28,12 +28,28 @@ Resources:
             Method: get
       Environment:
         Variables:
-          REGION: ap-southeast-1
-          
-  MyAuthFunction:
+          REGION: ap-southeast-1     
+  
+  StudentLambdaFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
-      CodeUri: ./authorizer
+      Handler: handler.studentService
+      Runtime: nodejs10.x
+      CodeUri: ./LambdaCodeNodeJS
+      #Policies:
+      #  - DynamoDBCrudPolicy:
+      #      TableName: !Ref carModelTableName
+      #Environment:
+      #  Variables:
+      #    TABLE_NAME1: !Ref carModelTableName 
+      Events:
+        SearchModelAPI:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /getStudentsList
+            Method: get
+      Timeout: 100
       Handler: handler.authorizer
       Runtime: nodejs10.x
  
