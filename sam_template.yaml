@@ -8,11 +8,6 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: dev
-      Auth:
-        DefaultAuthorizer: MyLambdaTokenAuthorizer
-        Authorizers: 
-          MyLambdaTokenAuthorizer:
-            FunctionArn: !GetAtt MyAuthFunction.Arn
   
   StudentLambdaFunction:
     Type: 'AWS::Serverless::Function'
@@ -35,9 +30,3 @@ Resources:
             Method: get
       Timeout: 100
 
-  MyAuthFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      CodeUri: ./authorizer
-      Handler: handler.authorizer
-      Runtime: nodejs10.x
