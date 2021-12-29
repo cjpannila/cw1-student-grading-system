@@ -19,7 +19,6 @@ Resources:
         SearchModelAPI:
           Type: Api
           Properties:
-            RestApiId: !Ref MyApi
             Path: /getstudents
             Method: get
       Environment:
