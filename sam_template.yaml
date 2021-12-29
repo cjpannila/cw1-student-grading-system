@@ -4,6 +4,15 @@ Description: Student Grading System Lambda - V1
 
 Resources:
 
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: dev
+      Auth:
+        DefaultAuthorizer: MyLambdaTokenAuthorizer
+        Authorizers: 
+          MyLambdaTokenAuthorizer:
+            FunctionArn: !GetAtt MyAuthFunction.Arn
      
   StudentGradingLambda:
     Type: 'AWS::Serverless::Function'
@@ -19,9 +28,17 @@ Resources:
         SearchModelAPI:
           Type: Api
           Properties:
+            RestApiId: !Ref MyApi
             Path: /getstudents
             Method: get
       Environment:
         Variables:
           REGION: ap-southeast-1
+  
+  MyAuthFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: ./authorizer
+      Handler: handler.authorizer
+      Runtime: nodejs10.x
  
