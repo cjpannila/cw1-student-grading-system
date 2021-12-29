@@ -34,6 +34,26 @@ Resources:
             Path: /getStudentsList
             Method: get
       Timeout: 100
+      
+  StudentGradingLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: student_lambda_function.student_handler
+      Runtime: python3.6
+      CodeUri: ./LambdaCode
+      Description: 'Lambda function for student grading system'
+      MemorySize: 128
+      Timeout: 30
+      Events:
+        SearchModelAPI:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyApi
+            Path: /getstudents
+            Method: get
+      Environment:
+        Variables:
+          REGION: ap-southeast-1
 
   MyAuthFunction:
     Type: 'AWS::Serverless::Function'
