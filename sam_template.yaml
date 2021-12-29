@@ -1,6 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: Student Grading System Lambda
+Description: Student Grading System Lambda - V1
+
 Resources:
 
   MyApi:
@@ -31,7 +32,7 @@ Resources:
           Properties:
             RestApiId: !Ref MyApi
             Path: /getStudentsList
-            Method: GET
+            Method: get
       Timeout: 100
       
   StudentGradingLambda:
@@ -45,7 +46,7 @@ Resources:
       Timeout: 30
       # Role: 'arn:aws:iam::397410853951:role/MyLambdaRole'
       Events:
-        getStudentsAPI:
+        SearchModelAPI:
           Type: Api
           Properties:
             RestApiId: !Ref MyApi
