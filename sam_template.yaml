@@ -4,37 +4,7 @@ Description: Student Grading System Lambda - V1
 
 Resources:
 
-  MyApi:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: dev
-      Auth:
-        DefaultAuthorizer: MyLambdaTokenAuthorizer
-        Authorizers: 
-          MyLambdaTokenAuthorizer:
-            FunctionArn: !GetAtt MyAuthFunction.Arn
-  
-  StudentLambdaFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      Handler: handler.studentService
-      Runtime: nodejs10.x
-      CodeUri: ./LambdaCodeNodeJS
-      #Policies:
-      #  - DynamoDBCrudPolicy:
-      #      TableName: !Ref carModelTableName
-      #Environment:
-      #  Variables:
-      #    TABLE_NAME1: !Ref carModelTableName 
-      Events:
-        SearchModelAPI:
-          Type: Api
-          Properties:
-            RestApiId: !Ref MyApi
-            Path: /getStudentsList
-            Method: get
-      Timeout: 100
-      
+     
   StudentGradingLambda:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -55,23 +25,4 @@ Resources:
       Environment:
         Variables:
           REGION: ap-southeast-1
-
-  MyAuthFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      CodeUri: ./authorizer
-      Handler: handler.authorizer
-      Runtime: nodejs10.x
  
-Outputs:
-  Region:
-    Description: "Region"
-    Value: !Ref AWS::Region
-
-  ApiId:
-    Description: "API ID"
-    Value: !Ref MyApi
-
-  ApiUrl:
-    Description: "API endpoint URL for Prod environment"
-    Value: !Sub 'https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/dev/'
