@@ -3,9 +3,13 @@
 const databaseManager = require('./databaseManager');
 const uuidv1 = require('uuid/v1');
 
+exports.studentService = async (event) => {
+	return getCarModel(event);
+}
+
 exports.modelSearchService = async (event) => {
 	return getCarModel(event);
-  }
+}
 
 exports.priceRetrievalService = async function (event){
 	return getCarPrice(event);
