@@ -16,7 +16,7 @@ Resources:
         getAZsAPI:
           Type: Api
           Properties:
-            Path: /getzones
+            Path: /getstudents
             Method: get
       Environment:
         Variables:
