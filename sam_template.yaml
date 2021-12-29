@@ -29,4 +29,11 @@ Resources:
       Environment:
         Variables:
           REGION: ap-southeast-1
+          
+  MyAuthFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      CodeUri: ./authorizer
+      Handler: handler.authorizer
+      Runtime: nodejs10.x
  
