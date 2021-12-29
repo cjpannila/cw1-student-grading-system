@@ -37,7 +37,7 @@ Resources:
     Properties:
       Handler: handler.modelSearchService
       Runtime: nodejs14.x
-      CodeUri: .
+      CodeUri: ./LambdaCodeNodeJS
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref carModelTableName
@@ -58,7 +58,7 @@ Resources:
     Properties:
       Handler: handler.priceRetrievalService
       Runtime: nodejs14.x
-      CodeUri: .
+      CodeUri: ./LambdaCodeNodeJS
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref carTableName
@@ -80,12 +80,12 @@ Resources:
       Handler: handler.studentService
       Runtime: nodejs14.x
       CodeUri: ./LambdaCodeNodeJS
-      #Policies:
-      #  - DynamoDBCrudPolicy:
-      #      TableName: !Ref carModelTableName
-      #Environment:
-      #  Variables:
-      #    TABLE_NAME1: !Ref carModelTableName 
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref carModelTableName
+      Environment:
+        Variables:
+          TABLE_NAME1: !Ref carModelTableName 
       Events:
         SearchModelAPI:
           Type: Api
