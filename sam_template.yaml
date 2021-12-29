@@ -13,7 +13,7 @@ Resources:
       Timeout: 30
       # Role: 'arn:aws:iam::397410853951:role/MyLambdaRole'
       Events:
-        getAZsAPI:
+        getStudentsAPI:
           Type: Api
           Properties:
             Path: /getstudents
