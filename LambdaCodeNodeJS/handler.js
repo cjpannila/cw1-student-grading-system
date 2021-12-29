@@ -1,3 +1,6 @@
-exports.studentService = async function (event) => {
-    return {statusCode: 200, body: {}, headers: {}};
+const AWS = require('aws-sdk');
+
+exports.studentService =  async function(event, context) {
+  console.log("EVENT: \n" + JSON.stringify(event, null, 2))
+  return context.logStreamName
 }
