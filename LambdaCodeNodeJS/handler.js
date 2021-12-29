@@ -1,8 +1,8 @@
 'use strict';
 
 exports.studentService = async (event) => {
-  students = {"studentName": "test1"};
-  return sendResponse(200, students);
+    student = { name: "Johnx", age: 31, city: "New York1" };
+    return {statusCode: 200, body: JSON.stringify(student)}
 }
 
 function sendResponse(statusCode, message) {
