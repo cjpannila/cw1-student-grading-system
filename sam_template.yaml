@@ -146,3 +146,15 @@ Resources:
       Handler: handler.authorizer
       Runtime: nodejs14.x
  
+Outputs:
+  Region:
+    Description: "Region"
+    Value: !Ref AWS::Region
+
+  ApiId:
+    Description: "API ID"
+    Value: !Ref MyApi
+
+  ApiUrl:
+    Description: "API endpoint URL for Prod environment"
+    Value: !Sub 'https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/dev/'
