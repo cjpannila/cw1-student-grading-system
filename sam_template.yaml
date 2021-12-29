@@ -8,33 +8,12 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: dev
-     
-  StudentGradingLambda:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      Handler: student_lambda_function.student_handler
-      Runtime: python3.6
-      CodeUri: ./LambdaCode
-      Description: 'Lambda function for student grading system'
-      MemorySize: 128
-      Timeout: 30
-      # Role: 'arn:aws:iam::397410853951:role/MyLambdaRole'
-      Events:
-        SearchModelAPI:
-          Type: Api
-          Properties:
-            RestApiId: !Ref MyApi
-            Path: /getstudents
-            Method: get
-      Environment:
-        Variables:
-          REGION: ap-southeast-1     
   
   StudentLambdaFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: handler.studentService
-      Runtime: nodejs10.x
+      Runtime: nodejs12.x
       CodeUri: ./LambdaCodeNodeJS
       #Policies:
       #  - DynamoDBCrudPolicy:
@@ -50,6 +29,3 @@ Resources:
             Path: /getStudentsList
             Method: get
       Timeout: 100
-      Handler: handler.authorizer
-      Runtime: nodejs10.x
- 
