@@ -2,7 +2,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file sam_template.yaml --s3-bucket cw1-student-lambda-pipeline --output-template-file output-sam-template.yaml
+      - aws cloudformation package --template-file sam_template.yaml --s3-bucket cw1-student-grading-pipeline-s3 --output-template-file output-sam-template.yaml
 artifacts:
   type: zip
   files:
