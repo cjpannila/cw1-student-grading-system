@@ -19,13 +19,13 @@ exports.studentSearchService = async (event) => {
 function getStudentModel(event) {
   const studentName = event.pathParameters.studentName;
   return databaseManager.getAllStudentModels().then(response => {
-    let item = null;
+    let student = null;
     response.Items.forEach(element => {
       if(element.name.toLowerCase() === studentName.toLowerCase()){
-        item = element;
+        student = element;
       }
     });
-  return sendResponse(200, JSON.stringify(item));
+  return sendResponse(200, JSON.stringify(student));
 });
 }  
 
