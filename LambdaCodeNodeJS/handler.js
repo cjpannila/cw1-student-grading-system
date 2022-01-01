@@ -57,10 +57,10 @@ function getCarModel(event) {
 }  
 
 function sendResponse(statusCode, message) {
-	const response = {
-		statusCode: statusCode,
+  const response = {
+    statusCode: statusCode,
     body: JSON.stringify(message),
-    headers: {}
-	};
-	return response
+    headers: {'Content-Type': 'application/json'}
+  };
+  return response;
 }
