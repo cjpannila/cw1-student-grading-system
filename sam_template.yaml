@@ -37,7 +37,7 @@ Resources:
   StudentSearchLambdaFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
-      Handler: handler.studentService
+      Handler: handler.studentSearchService
       Runtime: nodejs14.x
       CodeUri: ./LambdaCodeNodeJS
       Description: 'Lambda JS function for student listing'
