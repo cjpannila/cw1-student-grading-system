@@ -3,8 +3,8 @@
 const AWS = require('aws-sdk');
 let dynamo = new AWS.DynamoDB.DocumentClient();
 
-const TABLE_NAME = process.env.TABLE_NAME;
-const TABLE_NAME1 = process.env.TABLE_NAME1;
+const TABLE_NAME = "student";
+const TABLE_NAME1 = "studentMarks";
 
 module.exports.initializateDynamoClient = newDynamo => {
 	dynamo = newDynamo;
@@ -88,6 +88,7 @@ module.exports.getAllStudentModels = () => {
 };
 
 module.exports.getAllStudentMarks = () => {
+	console.log("getting all studentModels from table: ", TABLE_NAME);
 	const params = {
     TableName: TABLE_NAME1,
     Limit: 10
