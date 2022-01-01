@@ -52,7 +52,7 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref MyApi
-            Path: /getStudent/{studentId}
+            Path: /getStudent/{studentName}
             Method: get
       Timeout: 100
       
