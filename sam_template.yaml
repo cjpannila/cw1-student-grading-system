@@ -3,6 +3,7 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: Student Grading System Lambda - V1
 
 Parameters:
+
   studentTableName:
     Type: String
     Default: student
@@ -11,6 +12,7 @@ Parameters:
     MaxLength: 50
     AllowedPattern: ^[A-Za-z]+$
     ConstraintDescription: Required parameter. Must be characters only. No numbers allowed.
+
   studentMarksTableName:
       Type: String
       Default: studentMarks
@@ -41,10 +43,10 @@ Resources:
       Description: 'Lambda JS function for student listing'
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref studentMarksTableName
+            TableName: !Ref studentTableName
       Environment:
         Variables:
-          TABLE_NAME1: !Ref studentMarksTableName 
+          TABLE_NAME1: !Ref studentTableName 
       Events:
         SearchModelAPI:
           Type: Api
