@@ -2,9 +2,15 @@
 
 const databaseManager = require('./databaseManager');
 const uuidv1 = require('uuid/v1');
+const https = require('https');
+let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html";
 
-exports.studentService = async (event) => {
-	return getCarModel(event);
+exports.studentService =  function(event, context, callback) {
+  https.get(url, (res) => {
+    callback(null, res.statusCode)
+  }).on('error', (e) => {
+    callback(Error(e))
+  })
 }
 
 exports.modelSearchService = async (event) => {
