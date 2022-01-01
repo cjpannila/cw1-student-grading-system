@@ -5,7 +5,7 @@ Description: Student Grading System Lambda - V1
 Parameters:
   studentTableName:
     Type: String
-    Default: car
+    Default: student
     Description: Student table name
     MinLength: 3
     MaxLength: 50
@@ -13,7 +13,7 @@ Parameters:
     ConstraintDescription: Required parameter. Must be characters only. No numbers allowed.
   studentMarksTableName:
       Type: String
-      Default: carmodel
+      Default: studentMarks
       Description: Student marks table name
       MinLength: 3
       MaxLength: 50
