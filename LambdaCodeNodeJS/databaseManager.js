@@ -74,6 +74,7 @@ module.exports.updateItem = (studentId, paramsName, paramsValue) => {
 };
 
 module.exports.getAllStudentModels = () => {
+	console.log("getting all studentModels from table: ", TABLE_NAME);
 	const params = {
     TableName: TABLE_NAME,
     Limit: 10
@@ -88,7 +89,7 @@ module.exports.getAllStudentModels = () => {
 };
 
 module.exports.getAllStudentMarks = () => {
-	console.log("getting all studentModels from table: ", TABLE_NAME);
+	console.log("getting all studentModels from table: ", TABLE_NAME1);
 	const params = {
     TableName: TABLE_NAME1,
     Limit: 10
