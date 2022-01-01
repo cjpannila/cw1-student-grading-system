@@ -3,18 +3,18 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: Student Grading System Lambda - V1
 
 Parameters:
-  carTableName:
+  studentTableName:
     Type: String
     Default: car
-    Description: (Required) The name of the new DynamoDB table you want to create and save to. Minimum 3 characters
+    Description: Student table name
     MinLength: 3
     MaxLength: 50
     AllowedPattern: ^[A-Za-z]+$
     ConstraintDescription: Required parameter. Must be characters only. No numbers allowed.
-  carModelTableName:
+  studentMarksTableName:
       Type: String
       Default: carmodel
-      Description: (Required) The name of the new DynamoDB table you want to create and save to. Minimum 3 characters
+      Description: Student marks table name
       MinLength: 3
       MaxLength: 50
       AllowedPattern: ^[A-Za-z]+$
@@ -31,50 +31,8 @@ Resources:
         Authorizers: 
           MyLambdaTokenAuthorizer:
             FunctionArn: !GetAtt MyAuthFunction.Arn
-            
-  ModelSearchFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      Handler: handler.modelSearchService
-      Runtime: nodejs14.x
-      CodeUri: ./LambdaCodeNodeJS
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref carModelTableName
-      Environment:
-        Variables:
-          TABLE_NAME1: !Ref carModelTableName 
-      Events:
-        SearchModelAPI:
-          Type: Api
-          Properties:
-            RestApiId: !Ref MyApi
-            Path: /get-car-model/{modelName}
-            Method: GET
-      Timeout: 100
  
-  PriceRetrievalFunction:
-    Type: 'AWS::Serverless::Function'
-    Properties:
-      Handler: handler.priceRetrievalService
-      Runtime: nodejs14.x
-      CodeUri: ./LambdaCodeNodeJS
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref carTableName
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref carTableName  
-      Events:
-        SearchModelAPI:
-          Type: Api
-          Properties:
-            RestApiId: !Ref MyApi
-            Path: /get-car-price/{itemId}
-            Method: GET
-      Timeout: 100
- 
-  StudentLambdaFunction:
+  StudentSearchLambdaFunction:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: handler.studentService
@@ -83,16 +41,16 @@ Resources:
       Description: 'Lambda JS function for student listing'
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref carModelTableName
+            TableName: !Ref studentMarksTableName
       Environment:
         Variables:
-          TABLE_NAME1: !Ref carModelTableName 
+          TABLE_NAME1: !Ref studentMarksTableName 
       Events:
         SearchModelAPI:
           Type: Api
           Properties:
             RestApiId: !Ref MyApi
-            Path: /getStudentsList
+            Path: /getStudent/{studentId}
             Method: get
       Timeout: 100
       
@@ -116,27 +74,27 @@ Resources:
         Variables:
           REGION: ap-southeast-1
 
-  CarDynamoDBTable:
+  StudentDynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Ref carTableName
+      TableName: !Ref studentTableName
       AttributeDefinitions:
-        - AttributeName: itemId
+        - AttributeName: studentId
           AttributeType: S
       KeySchema:
-        - AttributeName: itemId
+        - AttributeName: studentId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
 
-  CarModelDynamoDBTable:
+  StudentMarksDynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Ref carModelTableName
+      TableName: !Ref studentMarksTableName
       AttributeDefinitions:
-        - AttributeName: modelId
+        - AttributeName: markId
           AttributeType: S
       KeySchema:
-        - AttributeName: modelId
+        - AttributeName: markId
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
       
