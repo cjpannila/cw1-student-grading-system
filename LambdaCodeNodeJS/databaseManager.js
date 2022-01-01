@@ -87,7 +87,7 @@ module.exports.getAll = () => {
 	    });
 };
 
-module.exports.getAllCarModels = () => {
+module.exports.getAllStudentModels = () => {
 	const params = {
     TableName: TABLE_NAME1,
     Limit: 10
