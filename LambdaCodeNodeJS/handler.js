@@ -1,7 +1,6 @@
 'use strict';
 
 const databaseManager = require('./databaseManager');
-const uuidv1 = require('uuid/v1');
 const https = require('https');
 let url = "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html";
 
