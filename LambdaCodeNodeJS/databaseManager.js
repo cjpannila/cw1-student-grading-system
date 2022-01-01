@@ -10,24 +10,24 @@ module.exports.initializateDynamoClient = newDynamo => {
 	dynamo = newDynamo;
 };
 
-module.exports.saveItem = item => {
+module.exports.saveItem = student => {
 	const params = {
 		TableName: TABLE_NAME,
-		Item: item
+		Item: student
 	};
 
 	return dynamo
 		.put(params)
 		.promise()
 		.then(() => {
-			return item.itemId;
+			return student.studentId;
 		});
 };
 
-module.exports.getItem = itemId => {
+module.exports.getItem = studentId => {
 	const params = {
 		Key: {
-			itemId: itemId
+			studentId: studentId
 		},
 		TableName: TABLE_NAME
 	};
@@ -40,10 +40,10 @@ module.exports.getItem = itemId => {
 		});
 };
 
-module.exports.deleteItem = itemId => {
+module.exports.deleteItem = studentId => {
 	const params = {
 		Key: {
-			itemId: itemId
+			studentId: studentId
 		},
 		TableName: TABLE_NAME
 	};
@@ -51,13 +51,13 @@ module.exports.deleteItem = itemId => {
 	return dynamo.delete(params).promise();
 };
 
-module.exports.updateItem = (itemId, paramsName, paramsValue) => {
+module.exports.updateItem = (studentId, paramsName, paramsValue) => {
 	const params = {
 		TableName: TABLE_NAME,
 		Key: {
-			itemId
+			studentId
 		},
-		ConditionExpression: 'attribute_exists(itemId)',
+		ConditionExpression: 'attribute_exists(studentId)',
 		UpdateExpression: 'set ' + paramsName + ' = :v',
 		ExpressionAttributeValues: {
 			':v': paramsValue
@@ -73,7 +73,7 @@ module.exports.updateItem = (itemId, paramsName, paramsValue) => {
 		});
 };
 
-module.exports.getAll = () => {
+module.exports.getAllStudentModels = () => {
 	const params = {
     TableName: TABLE_NAME,
     Limit: 10
@@ -87,7 +87,7 @@ module.exports.getAll = () => {
 	    });
 };
 
-module.exports.getAllCarModels = () => {
+module.exports.getAllStudentMarks = () => {
 	const params = {
     TableName: TABLE_NAME1,
     Limit: 10
